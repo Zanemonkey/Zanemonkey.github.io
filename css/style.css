@@ -19,6 +19,11 @@ body {
   text-align: center;
 }
 
+#winner_banner h3 {
+  font-size: 25px;
+  color: red;
+}
+
 /*
 body,
 div,

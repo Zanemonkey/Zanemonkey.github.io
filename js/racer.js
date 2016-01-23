@@ -1,38 +1,49 @@
-// racer.js - a drag racing game in JS
-// by Howard Smith 16/01/2016 AD
-// char x = 88
-// char o = 79
+var player1Name
+var player2Name
+var someoneWon = false
 
-$(document).ready(function() {
-  function doStuff() {
- // $(".racer_table #player1_strip .active").html("X");
-    $(".racer_table #player1_strip .active").next().addClass("active").html("X");
-    if($("#finish_line_x").hasClass("active") ) {
-      alert("X wins!");
-    }
-  }
+function moveX(){
+  $('#player1_strip .active').removeClass('active').empty().next('td').addClass('active').text('X');
+  if ($('#finish_line_x').hasClass('active')){
+    //alert(player1Name + " Wins!");
+    $('#winner_banner').html('<h3>' + player1Name + ' wins!</h3>')
+    someoneWon = true
+    //resetRace()
+  };
+}
 
-  function doOtherStuff() {
-   // $(".racer_table #player2_strip .active").html("O");
-    $(".racer_table #player2_strip .active").next().addClass("active").html("O");
-    if($("#finish_line_o").hasClass("active") ) {
-      alert("O wins!");
-    }
-  }
+function moveO(){
+  $('#player2_strip .active').removeClass('active').empty().next('td').addClass('active').text('O');
+  if ($('#finish_line_o').hasClass('active')){
+    //alert(player2Name + ' Wins!');
+    $('#winner_banner').html('<h3>' + player2Name + ' wins!</h3>')
+    someoneWon = true
+    //resetRace()
+  };
+}
 
-  $("button#resetButton").click(function() {
-      alert("OK, I'm resetting");
-      location.reload();
-    });
-  //$("button#otherGoButton").click(doOtherStuff);
+function resetRace(){
+  $('.active').empty().removeClass('active');
+  $('#player1_strip td:first').addClass('active').text('X');
+  $('#player2_strip td:first').addClass('active').text('O');
+  $('#winner_banner').empty()
+  getNames()
+  someoneWon = false
+}
 
-  $(document).keyup(function(e){
-    if(event.which == 88) {
-      doStuff();
-    } else
-    if(event.which == 79) {
-      doOtherStuff();
-    }
-  });
+function getNames(){
+  player1Name = prompt('What is Player 1\'s name?')
+  player2Name = prompt('What is Player 2\'s name?')
+  $('#p1Name').text(player1Name + " - push x")
+  $('#p2Name').text(player2Name + " - push o")
+}
+
+$(document).keyup(function(e){
+  if ((e.keyCode == 88 || e.keyCode == 120) && !someoneWon) {moveX();}
+  if ((e.keyCode == 79 || e.keyCode == 111) && !someoneWon){moveO();}
 });
+
+$('#resetButton').click(resetRace)
+
+$(resetRace)
 
