@@ -1,12 +1,15 @@
 var player1Name
 var player2Name
+var player1Score = 0
+var player2Score = 0
 var someoneWon = false
 
 function moveX(){
   $('#player1_strip .active').removeClass('active').empty().next('td').addClass('active').text('X');
+  player1Score++
   if ($('#finish_line_x').hasClass('active')){
     //alert(player1Name + " Wins!");
-    $('#winner_banner').html('<h3>' + player1Name + ' wins!</h3>')
+    $('#winner_banner').html('<h3>' + player1Name + ' wins by ' + player1Score - player2Score + ' squares!</h3>')
     someoneWon = true
     //resetRace()
   };
@@ -14,9 +17,10 @@ function moveX(){
 
 function moveO(){
   $('#player2_strip .active').removeClass('active').empty().next('td').addClass('active').text('O');
+  player2Score++
   if ($('#finish_line_o').hasClass('active')){
     //alert(player2Name + ' Wins!');
-    $('#winner_banner').html('<h3>' + player2Name + ' wins!</h3>')
+    $('#winner_banner').html('<h3>' + player2Name + ' wins by ' + player2Score - player1Score + ' squares!</h3>')
     someoneWon = true
     //resetRace()
   };
