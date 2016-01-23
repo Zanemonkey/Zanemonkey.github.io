@@ -9,7 +9,12 @@ function moveX(){
   player1Score++
   if ($('#finish_line_x').hasClass('active')){
     //alert(player1Name + " Wins!");
-    $('#winner_banner').html('<h3>' + player1Name + ' wins by ' + player1Score - player2Score + ' squares!</h3>')
+    if ((player1Score - player2Score) > 1){
+    $('#winner_banner').html('<h3>' + player1Name + ' wins by ' + (player1Score - player2Score) + ' squares!</h3>')
+    }
+    else {
+    $('#winner_banner').html('<h3>' + player1Name + ' wins by only ' + (player1Score - player2Score) + ' square!</h3>')
+    }
     someoneWon = true
     //resetRace()
   };
@@ -20,7 +25,12 @@ function moveO(){
   player2Score++
   if ($('#finish_line_o').hasClass('active')){
     //alert(player2Name + ' Wins!');
-    $('#winner_banner').html('<h3>' + player2Name + ' wins by ' + player2Score - player1Score + ' squares!</h3>')
+    if ((player2Score - player1Score) > 1){
+    $('#winner_banner').html('<h3>' + player2Name + ' wins by ' + (player2Score - player1Score) + ' squares!</h3>')
+    }
+    else {
+    $('#winner_banner').html('<h3>' + player2Name + ' wins by only ' + (player2Score - player1Score) + ' square!</h3>')
+    }
     someoneWon = true
     //resetRace()
   };
@@ -33,6 +43,8 @@ function resetRace(){
   $('#winner_banner').empty()
   getNames()
   someoneWon = false
+  player1Score = 0
+  player2Score = 0
 }
 
 function getNames(){
